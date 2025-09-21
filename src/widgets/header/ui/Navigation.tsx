@@ -8,15 +8,15 @@ import { HeaderLinkType } from "../model/types";
 export const Navigation = () => {
   const pathname = usePathname();
   return (
-    <nav className="flex gap-4 justify-end">
+    <nav className="flex gap-4 justify-center md:justify-end">
       {links.map(({ label, href }: HeaderLinkType, idx) => (
         <Link
+          key={idx}
+          href={href}
           className={cn(
             "transition hover:opacity-70",
             pathname === href && "text-accent"
           )}
-          href={href}
-          key={`header-link-${idx}`}
         >
           {label}
         </Link>

@@ -21,13 +21,9 @@ export const HomePage = async () => {
           Все <Image src={ArrowIcon} alt="Иконка стрелки" />
         </Link>
       </div>
-      <div className="grid grid-cols-3 gap-10">
+      <div className="grid grid-cols-2 gap-4 gap-y-8 md:grid-cols-3 md:gap-10">
         {rackets.map((racket: RacketType) => (
-          <RacketItem
-            racket={racket}
-            key={`racket-id-${racket.id}`}
-            isLargeHeading={true}
-          />
+          <RacketItem key={racket.id} racket={racket} isLargeHeading={true} />
         ))}
       </div>
     </>

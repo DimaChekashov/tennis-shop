@@ -17,13 +17,13 @@ export const RacketPage = async ({ racketId }: RacketPageProps) => {
   if (!racket) notFound();
 
   return (
-    <div className="grid grid-cols-4 gap-10">
-      <div className="pt-6">
-        <div className="text-heading text-xl mb-2">{racket.model}</div>
-        <h1 className="text-heading text-2xl mb-4">{racket.name}</h1>
-        <p className="text-text">{racket.description}</p>
+    <div className="grid gap-6 lg:gap-10 lg:grid-cols-4">
+      <div className="lg:pt-6">
+        <div className="text-heading lg:text-xl mb-2">{racket.model}</div>
+        <h1 className="text-heading text-xl lg:text-2xl mb-4">{racket.name}</h1>
+        <p className="text-text text-sm lg:text-base">{racket.description}</p>
       </div>
-      <div className="border border-border col-span-2 relative h-220">
+      <div className="border border-border relative aspect-3/4 max-w-md order-first lg:max-w-full lg:order-none lg:col-span-2">
         <Image
           src={racket.imageUrl}
           alt={racket.name}
@@ -31,8 +31,10 @@ export const RacketPage = async ({ racketId }: RacketPageProps) => {
           style={{ objectFit: "cover", objectPosition: "center" }}
         />
       </div>
-      <div className="pt-6">
-        <p className="text-heading text-2xl">Цена: {racket.price}$</p>
+      <div className="lg:pt-6">
+        <p className="text-heading text-xl lg:text-2xl">
+          Цена: {racket.price}$
+        </p>
       </div>
     </div>
   );

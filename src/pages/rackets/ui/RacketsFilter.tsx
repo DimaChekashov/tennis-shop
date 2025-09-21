@@ -27,10 +27,10 @@ export const RacketsFilter: React.FC<RacketsFilterType> = ({
         checked={selectedBrand === BRANDS_ALL}
         onChange={handleBrandChange}
       />
-      {brands.map((brand, idx) => (
+      {brands.map((brand, brandIdx) => (
         <RadioButton
-          key={`brand-${idx}`}
-          id={`brand-${idx}`}
+          key={brandIdx}
+          id={`brand-${brandIdx}`}
           name="brand"
           value={brand}
           label={brand}

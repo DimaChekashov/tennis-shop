@@ -27,7 +27,7 @@ export const RacketItem: React.FC<RacketItemType> = ({
       <div
         className={cn(
           "text-heading transition group-hover:text-accent",
-          isLargeHeading ? "text-xl" : "text-lg"
+          isLargeHeading ? "lg:text-xl" : "lg:text-lg"
         )}
       >
         {racket.name}

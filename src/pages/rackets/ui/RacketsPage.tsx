@@ -17,7 +17,7 @@ export const RacketsPage: React.FC<RacketsPageType> = ({
   const [selectedBrand, setSelectedBrand] = useState<string>(BRANDS_ALL);
 
   return (
-    <div className="mt-6 grid grid-cols-4 gap-10">
+    <div className="mt-6 grid gap-4 lg:gap-10 md:grid-cols-4">
       <div>
         <div className="text-text text-lg mb-2">Бренд</div>
         <RacketsFilter
@@ -28,14 +28,14 @@ export const RacketsPage: React.FC<RacketsPageType> = ({
       </div>
       <div className="col-span-3">
         <h1 className="text-heading text-4xl mb-8">Ракетки</h1>
-        <div className="grid grid-cols-4 gap-5">
+        <div className="grid grid-cols-2 gap-5 lg:grid-cols-3 xl:grid-cols-4">
           {racketsData
             .filter((racket: RacketType) => {
               if (selectedBrand === BRANDS_ALL) return true;
               return racket.brand.name === selectedBrand;
             })
             .map((racket: RacketType) => (
-              <RacketItem racket={racket} key={`racket-id-${racket.id}`} />
+              <RacketItem racket={racket} key={racket.id} />
             ))}
         </div>
       </div>
