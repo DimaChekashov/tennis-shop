@@ -9,8 +9,10 @@ export type RacketType = {
   top10: boolean;
   description: string;
   brandId: number;
-  brand: {
-    id: number;
-    name: string;
-  };
+  brand: BrandType;
+};
+
+export type BrandType = {
+  id: number;
+  name: string;
 };

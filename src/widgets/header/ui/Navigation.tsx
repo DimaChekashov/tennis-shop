@@ -11,7 +11,10 @@ export const Navigation = () => {
     <nav className="flex gap-4 justify-end">
       {links.map(({ label, href }: HeaderLinkType, idx) => (
         <Link
-          className={cn(pathname === href && "text-accent")}
+          className={cn(
+            "transition hover:opacity-70",
+            pathname === href && "text-accent"
+          )}
           href={href}
           key={`header-link-${idx}`}
         >
