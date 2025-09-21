@@ -8,7 +8,7 @@ const roboto = Roboto({ subsets: ["latin"], variable: "--font-roboto" });
 
 export const metadata: Metadata = {
   title: "Tennis Shop",
-  description: "tennis rocket shop",
+  description: "tennis racket shop",
 };
 
 export default function RootLayout({

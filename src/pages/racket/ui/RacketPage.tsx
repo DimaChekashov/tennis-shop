@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { fetchRockets } from "@/shared/api/fetchRockets";
+import { fetchRackets } from "@/shared/api/fetchRackets";
 import { RacketType } from "@/shared/lib/types";
 import { notFound } from "next/navigation";
 
@@ -8,7 +8,7 @@ type RacketPageProps = {
 };
 
 export const RacketPage = async ({ racketId }: RacketPageProps) => {
-  const rackets = await fetchRockets()
+  const rackets = await fetchRackets()
     .then((res) => res.json())
     .then((data) => [undefined, ...data]);
 
