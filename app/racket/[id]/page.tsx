@@ -9,13 +9,13 @@ export async function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }): Promise<Metadata> {
   const { id } = await params;
 
   const racket = await fetchRackets()
     .then((res) => res.json())
-    .then((data) => data[Number(id)]);
+    .then((data) => data[Number(id) - 1]);
 
   if (!racket) return {};
 

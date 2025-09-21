@@ -4,6 +4,6 @@ export const BRANDS_ALL = "All";
 
 export const ROUTES = {
   home: "/",
-  racket: "/racket",
+  racket: (id: number) => `/racket/${id}`,
   rackets: "/rackets",
 };
