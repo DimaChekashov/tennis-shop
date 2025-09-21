@@ -1,6 +1,11 @@
 import RacketsPage from "@/pages/rackets";
 import { fetchRackets } from "@/shared/api/fetchRackets";
 import { RacketType } from "@/shared/lib/types";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Tennis Shop - Rackets",
+};
 
 export default async function Rackets() {
   const rackets = await fetchRackets().then((res) => res.json());

@@ -1,5 +1,11 @@
 import { ROUTES } from "@/shared/lib/consts";
+import { Metadata } from "next";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "Tennis Shop - 404",
+  description: "404 - Страница не найдена!",
+};
 
 export default async function Racket() {
   return (
