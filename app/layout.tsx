@@ -2,7 +2,7 @@ import { Roboto } from "next/font/google";
 import type { Metadata } from "next";
 import Header from "@/widgets/header";
 import Footer from "@/widgets/footer";
-import "./styles/globals.css";
+import "@/app/styles/globals.css";
 
 const roboto = Roboto({ subsets: ["latin"], variable: "--font-roboto" });
 
