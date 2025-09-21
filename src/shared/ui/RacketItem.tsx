@@ -15,7 +15,7 @@ export const RacketItem: React.FC<RacketItemType> = ({
   isLargeHeading = false,
 }) => {
   return (
-    <Link href={ROUTES.racket(racket.id)} className="group">
+    <Link href={ROUTES.racket(racket.id)} prefetch={false} className="group">
       <div className="border border-border relative aspect-3/4 mb-4">
         <Image
           src={racket.imageUrl}
