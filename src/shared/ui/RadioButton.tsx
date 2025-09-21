@@ -24,7 +24,7 @@ export const RadioButton: React.FC<RadioButtonType> = ({
         value={value}
         {...args}
       />
-      <label className="text-heading ml-2" htmlFor={id}>
+      <label className="text-heading ml-2 cursor-pointer" htmlFor={id}>
         {label}
       </label>
     </div>

@@ -1,10 +1,9 @@
 "use client";
 import { RacketType } from "@/shared/lib/types";
-import Image from "next/image";
-import Link from "next/link";
 import { RacketsFilter } from "./RacketsFilter";
 import React, { useState } from "react";
-import { BRANDS_ALL } from "../model/consts";
+import { BRANDS_ALL } from "@/shared/lib/consts";
+import { RacketItem } from "@/shared/ui";
 
 type RacketsPageType = {
   brandsNames: string[];
@@ -36,23 +35,7 @@ export const RacketsPage: React.FC<RacketsPageType> = ({
               return racket.brand.name === selectedBrand;
             })
             .map((racket: RacketType) => (
-              <Link
-                href={`/racket/${racket.id}`}
-                key={`racket-id-${racket.id}`}
-                className="group"
-              >
-                <div className="border border-border relative aspect-3/4 mb-4">
-                  <Image
-                    src={racket.imageUrl}
-                    alt={racket.name}
-                    fill={true}
-                    style={{ objectFit: "cover", objectPosition: "center" }}
-                  />
-                </div>
-                <div className="text-heading text-lg transition group-hover:text-accent">
-                  {racket.name}
-                </div>
-              </Link>
+              <RacketItem racket={racket} key={`racket-id-${racket.id}`} />
             ))}
         </div>
       </div>

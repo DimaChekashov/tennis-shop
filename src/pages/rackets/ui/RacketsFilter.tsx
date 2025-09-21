@@ -1,6 +1,6 @@
 import { RadioButton } from "@/shared/ui";
 import React from "react";
-import { BRANDS_ALL } from "../model/consts";
+import { BRANDS_ALL } from "@/shared/lib/consts";
 
 type RacketsFilterType = {
   brands: string[];

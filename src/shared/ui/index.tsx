@@ -1,3 +1,4 @@
 import { RadioButton } from "./RadioButton";
+import { RacketItem } from "./RacketItem";
 
-export { RadioButton };
+export { RadioButton, RacketItem };
