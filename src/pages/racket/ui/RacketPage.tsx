@@ -1,20 +1,23 @@
 import Image from "next/image";
+import { fetchRockets } from "@/shared/api/fetchRockets";
+import { RacketType } from "@/shared/lib/types";
+import { notFound } from "next/navigation";
 
 type RacketPageProps = {
   racketId: string;
 };
 
 export const RacketPage = async ({ racketId }: RacketPageProps) => {
-  const rackets = await fetch("http://localhost:3000/rackets.json")
+  const rackets = await fetchRockets()
     .then((res) => res.json())
     .then((data) => [undefined, ...data]);
 
-  const racket = rackets[Number(racketId)];
+  const racket: RacketType = rackets[Number(racketId)];
 
-  if (!racket) return <div>404 - Page not found!</div>;
+  if (!racket) notFound();
 
   return (
-    <div className="grid grid-cols-4 gap-10 px-6">
+    <div className="grid grid-cols-4 gap-10">
       <div className="pt-6">
         <div className="text-heading text-xl mb-2">{racket.model}</div>
         <h1 className="text-heading text-2xl mb-4">{racket.name}</h1>
@@ -29,7 +32,7 @@ export const RacketPage = async ({ racketId }: RacketPageProps) => {
         />
       </div>
       <div className="pt-6">
-        <p className="text-heading text-2xl">Price: {racket.price}$</p>
+        <p className="text-heading text-2xl">Цена: {racket.price}$</p>
       </div>
     </div>
   );

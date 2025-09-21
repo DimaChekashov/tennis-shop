@@ -22,7 +22,7 @@ export default function RootLayout({
         className={`${roboto.variable} grid grid-rows-[auto_1fr_auto] min-h-screen`}
       >
         <Header />
-        <main>{children}</main>
+        <main className="px-6">{children}</main>
         <Footer />
       </body>
     </html>
