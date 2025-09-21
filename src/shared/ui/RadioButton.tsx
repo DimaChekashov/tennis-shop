@@ -15,9 +15,18 @@ export const RadioButton: React.FC<RadioButtonType> = ({
   ...args
 }) => {
   return (
-    <div>
-      <input type="radio" id={id} name={name} value={value} {...args} />
-      <label htmlFor={id}>{label}</label>
+    <div className="flex items-start mb-2">
+      <input
+        className="mt-1"
+        type="radio"
+        id={id}
+        name={name}
+        value={value}
+        {...args}
+      />
+      <label className="text-heading ml-2" htmlFor={id}>
+        {label}
+      </label>
     </div>
   );
 };
