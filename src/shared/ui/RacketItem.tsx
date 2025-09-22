@@ -21,7 +21,7 @@ export const RacketItem: React.FC<RacketItemType> = ({
           src={racket.imageUrl}
           alt={racket.name}
           fill={true}
-          style={{ objectFit: "cover", objectPosition: "center" }}
+          className="object-cover object-center"
         />
       </div>
       <div

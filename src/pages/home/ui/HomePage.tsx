@@ -8,6 +8,7 @@ import ArrowIcon from "@/shared/assets/images/icons/arrow.svg";
 import Image from "next/image";
 
 export const HomePage = async () => {
+  // TODO: Create helper for fetching
   const rackets = await fetchRackets().then((res) => res.json());
 
   return (

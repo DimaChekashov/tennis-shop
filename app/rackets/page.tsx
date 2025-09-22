@@ -8,6 +8,7 @@ export const metadata: Metadata = {
 };
 
 export default async function Rackets() {
+  // TODO: Create helper for fetching
   const rackets = await fetchRackets().then((res) => res.json());
   const brands: string[] = Array.from(
     new Set(rackets.map((racket: RacketType) => racket.brand.name))

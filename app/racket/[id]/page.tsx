@@ -1,5 +1,6 @@
 import RacketPage from "@/pages/racket";
 import { fetchRackets } from "@/shared/api/fetchRackets";
+import { RacketType } from "@/shared/lib/types";
 import { Metadata } from "next";
 
 export async function generateStaticParams() {
@@ -13,9 +14,12 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { id } = await params;
 
+  // TODO: Create helper for fetching
   const racket = await fetchRackets()
     .then((res) => res.json())
-    .then((data) => data[Number(id) - 1]);
+    .then((data) =>
+      data.find((racket: RacketType) => racket.id === Number(id))
+    );
 
   if (!racket) return {};
 

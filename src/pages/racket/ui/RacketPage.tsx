@@ -8,11 +8,12 @@ type RacketPageProps = {
 };
 
 export const RacketPage = async ({ racketId }: RacketPageProps) => {
-  const rackets = await fetchRackets()
-    .then((res) => res.json())
-    .then((data) => [undefined, ...data]);
+  // TODO: Create helper for fetching
+  const rackets = await fetchRackets().then((res) => res.json());
 
-  const racket: RacketType = rackets[Number(racketId)];
+  const racket: RacketType = rackets.find(
+    (racket: RacketType) => racket.id === Number(racketId)
+  );
 
   if (!racket) notFound();
 
@@ -28,7 +29,7 @@ export const RacketPage = async ({ racketId }: RacketPageProps) => {
           src={racket.imageUrl}
           alt={racket.name}
           fill={true}
-          style={{ objectFit: "cover", objectPosition: "center" }}
+          className="object-cover object-center"
         />
       </div>
       <div className="lg:pt-6">
