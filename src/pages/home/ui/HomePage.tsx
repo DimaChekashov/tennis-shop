@@ -1,15 +1,15 @@
 import Link from "next/link";
-import { fetchRackets } from "@/shared/api/fetchRackets";
 import { RacketType } from "@/shared/lib/types";
 import { ROUTES } from "@/shared/lib/consts";
 import { RacketItem } from "@/shared/ui";
 
 import ArrowIcon from "@/shared/assets/images/icons/arrow.svg";
 import Image from "next/image";
+import { fetchAllRackets } from "@/shared/api/rackets";
 
 export const HomePage = async () => {
   // TODO: Create helper for fetching
-  const rackets = await fetchRackets().then((res) => res.json());
+  const rackets = await fetchAllRackets();
 
   return (
     <>

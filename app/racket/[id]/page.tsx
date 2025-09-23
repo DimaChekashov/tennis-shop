@@ -1,5 +1,5 @@
 import RacketPage from "@/pages/racket";
-import { fetchRackets } from "@/shared/api/fetchRackets";
+import { fetchAllRackets } from "@/shared/api/rackets";
 import { RacketType } from "@/shared/lib/types";
 import { Metadata } from "next";
 
@@ -15,11 +15,9 @@ export async function generateMetadata({
   const { id } = await params;
 
   // TODO: Create helper for fetching
-  const racket = await fetchRackets()
-    .then((res) => res.json())
-    .then((data) =>
-      data.find((racket: RacketType) => racket.id === Number(id))
-    );
+  const racket = await fetchAllRackets().then((data) =>
+    data.find((racket: RacketType) => racket.id === Number(id))
+  );
 
   if (!racket) return {};
 

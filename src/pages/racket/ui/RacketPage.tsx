@@ -1,19 +1,13 @@
 import Image from "next/image";
-import { fetchRackets } from "@/shared/api/fetchRackets";
-import { RacketType } from "@/shared/lib/types";
 import { notFound } from "next/navigation";
+import { fetchRacketById } from "@/shared/api/rackets";
 
 type RacketPageProps = {
   racketId: string;
 };
 
 export const RacketPage = async ({ racketId }: RacketPageProps) => {
-  // TODO: Create helper for fetching
-  const rackets = await fetchRackets().then((res) => res.json());
-
-  const racket: RacketType = rackets.find(
-    (racket: RacketType) => racket.id === Number(racketId)
-  );
+  const racket = await fetchRacketById(racketId);
 
   if (!racket) notFound();
 
