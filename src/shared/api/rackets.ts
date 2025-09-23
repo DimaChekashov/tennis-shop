@@ -17,3 +17,11 @@ export const fetchRacketById = async (id: string) => {
 
   return racket.product;
 };
+
+export const fetchTopTenRackets = async () => {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_RACKET_API}/top-10`);
+
+  const rackets: RacketType[] = await res.json();
+
+  return rackets;
+};
