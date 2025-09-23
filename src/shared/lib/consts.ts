@@ -6,4 +6,5 @@ export const ROUTES = {
   home: "/",
   racket: (id: number) => `/racket/${id}`,
   rackets: "/rackets",
+  topTen: "/top-ten",
 };
