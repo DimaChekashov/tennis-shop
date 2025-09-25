@@ -1,11 +1,29 @@
-import { RacketType } from "../lib/types";
+import { RacketType, Response } from "../lib/types";
 
-export const fetchAllRackets = async () => {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_RACKET_API}/products`);
+export const fetchRackets = async ({
+  page = 1,
+  limit = 2,
+}: {
+  page?: number;
+  limit?: number;
+}): Promise<Response<RacketType[]>> => {
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_RACKET_API}/products?page=${page}&limit=${limit}`
+  );
 
-  const rackets: RacketType[] = await res.json();
+  if (!response.ok) {
+    return {
+      isError: true,
+      data: undefined,
+    };
+  }
 
-  return rackets;
+  const rackets: RacketType[] = await response.json();
+
+  return {
+    isError: false,
+    data: rackets,
+  };
 };
 
 export const fetchRacketById = async (id: string) => {
