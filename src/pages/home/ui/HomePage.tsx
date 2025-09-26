@@ -5,11 +5,14 @@ import { RacketItem } from "@/shared/ui";
 
 import ArrowIcon from "@/shared/assets/images/icons/arrow.svg";
 import Image from "next/image";
-import { fetchAllRackets } from "@/shared/api/rackets";
+import { fetchRackets } from "@/shared/api/rackets";
+import { notFound } from "next/navigation";
 
 export const HomePage = async () => {
   // TODO: Create helper for fetching
-  const rackets = await fetchAllRackets();
+  const rackets = await fetchRackets({ page: 1, limit: 10 });
+
+  if (!rackets || !rackets.data) return notFound();
 
   return (
     <>
@@ -23,7 +26,7 @@ export const HomePage = async () => {
         </Link>
       </div>
       <div className="grid grid-cols-2 gap-4 gap-y-8 md:grid-cols-3 md:gap-10">
-        {rackets.map((racket: RacketType) => (
+        {rackets.data.map((racket: RacketType) => (
           <RacketItem key={racket.id} racket={racket} isLargeHeading={true} />
         ))}
       </div>

@@ -6,7 +6,7 @@ export const fetchRackets = async ({
 }: {
   page?: number;
   limit?: number;
-}): Promise<Response<RacketType[]>> => {
+} = {}): Promise<Response<RacketType[]>> => {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_RACKET_API}/products?page=${page}&limit=${limit}`
   );

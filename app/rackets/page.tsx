@@ -1,7 +1,8 @@
 import RacketsPage from "@/pages/rackets";
-import { fetchAllRackets } from "@/shared/api/rackets";
+import { fetchRackets } from "@/shared/api/rackets";
 import { RacketType } from "@/shared/lib/types";
 import { Metadata } from "next";
+import { notFound } from "next/navigation";
 
 export const metadata: Metadata = {
   title: "Tennis Shop - Rackets",
@@ -9,10 +10,13 @@ export const metadata: Metadata = {
 
 export default async function Rackets() {
   // TODO: Create helper for fetching
-  const rackets = await fetchRackets();
+  const rackets = await fetchRackets({ page: 1, limit: 10 });
+
+  if (!rackets || !rackets.data) return notFound();
+
   const brands: string[] = Array.from(
-    new Set(rackets.map((racket: RacketType) => racket.brand.name))
+    new Set(rackets.data.map((racket: RacketType) => racket.brand.name))
   );
 
-  return <RacketsPage racketsData={rackets} brandsNames={brands} />;
+  return <RacketsPage racketsData={rackets.data} brandsNames={brands} />;
 }
