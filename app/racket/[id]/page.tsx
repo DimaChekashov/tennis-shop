@@ -1,10 +1,7 @@
 import RacketPage from "@/pages/racket";
-import { fetchRackets } from "@/shared/api/rackets";
+import { fetchRacketById } from "@/shared/api/rackets";
 import { Metadata } from "next";
-
-export async function generateStaticParams() {
-  return [{ id: "1" }, { id: "4" }, { id: "7" }];
-}
+import { Suspense } from "react";
 
 export async function generateMetadata({
   params,
@@ -13,18 +10,13 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { id } = await params;
 
-  // TODO: Create helper for fetching
-  const rackets = await fetchRackets({ page: 1, limit: 20 });
+  const { data, isError } = await fetchRacketById(id);
 
-  if (!rackets || !rackets.data) return {};
-
-  const racket = rackets.data.find((racket) => racket.id === Number(id));
-
-  if (!racket) return {};
+  if (isError || data === undefined) return {};
 
   return {
-    title: `Tennis Shop - ${racket.name}`,
-    description: racket.description,
+    title: `Tennis Shop - ${data.name}`,
+    description: data.description,
   };
 }
 
@@ -35,5 +27,9 @@ export default async function Racket({
 }) {
   const { id } = await params;
 
-  return <RacketPage racketId={id} />;
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <RacketPage racketId={id} />
+    </Suspense>
+  );
 }

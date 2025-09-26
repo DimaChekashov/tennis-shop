@@ -26,14 +26,26 @@ export const fetchRackets = async ({
   };
 };
 
-export const fetchRacketById = async (id: string) => {
-  const res = await fetch(
+export const fetchRacketById = async (
+  id: string
+): Promise<Response<RacketType>> => {
+  const response = await fetch(
     `${process.env.NEXT_PUBLIC_RACKET_API}/product/${id}`
   );
 
-  const racket: { product: RacketType } = await res.json();
+  if (!response.ok) {
+    return {
+      isError: true,
+      data: undefined,
+    };
+  }
 
-  return racket.product;
+  const racket: { product: RacketType } = await response.json();
+
+  return {
+    isError: false,
+    data: racket.product,
+  };
 };
 
 export const fetchTopTenRackets = async (): Promise<Response<RacketType[]>> => {
