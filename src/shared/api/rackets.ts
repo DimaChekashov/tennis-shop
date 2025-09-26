@@ -36,10 +36,20 @@ export const fetchRacketById = async (id: string) => {
   return racket.product;
 };
 
-export const fetchTopTenRackets = async () => {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_RACKET_API}/top-10`);
+export const fetchTopTenRackets = async (): Promise<Response<RacketType[]>> => {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_RACKET_API}/top-10`);
 
-  const rackets: RacketType[] = await res.json();
+  if (!response.ok) {
+    return {
+      isError: true,
+      data: undefined,
+    };
+  }
 
-  return rackets;
+  const rackets: RacketType[] = await response.json();
+
+  return {
+    isError: false,
+    data: rackets,
+  };
 };
