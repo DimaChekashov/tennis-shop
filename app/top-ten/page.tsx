@@ -9,5 +9,9 @@ export const metadata: Metadata = {
 export default async function Rackets() {
   const rackets = await fetchTopTenRackets();
 
-  return <TopTenPage racketsData={rackets} />;
+  if (rackets.isError) return "error";
+
+  if (rackets.data === undefined) return "no data";
+
+  return <TopTenPage racketsData={rackets.data} />;
 }
