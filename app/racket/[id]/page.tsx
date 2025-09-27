@@ -1,8 +1,6 @@
 import RacketPage from "@/pages/racket";
-import { RacketLoading } from "@/pages/racket/ui/RacketLoading";
 import { fetchRacketById } from "@/shared/api/rackets";
 import { Metadata } from "next";
-import { Suspense } from "react";
 
 export async function generateMetadata({
   params,
@@ -28,9 +26,5 @@ export default async function Racket({
 }) {
   const { id } = await params;
 
-  return (
-    <Suspense fallback={<RacketLoading />}>
-      <RacketPage racketId={id} />
-    </Suspense>
-  );
+  return <RacketPage racketId={id} />;
 }
