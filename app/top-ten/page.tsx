@@ -1,0 +1,17 @@
+import TopTenPage from "@/pages/top-ten";
+import { fetchTopTenRackets } from "@/shared/api/rackets";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Tennis Shop - Top-10 Rackets",
+};
+
+export default async function Rackets() {
+  const rackets = await fetchTopTenRackets();
+
+  if (rackets.isError) return "error";
+
+  if (rackets.data === undefined) return "no data";
+
+  return <TopTenPage racketsData={rackets.data} />;
+}

@@ -16,3 +16,8 @@ export type BrandType = {
   id: number;
   name: string;
 };
+
+export type Response<T> = {
+  isError: boolean;
+  data?: T;
+};

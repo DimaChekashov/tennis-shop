@@ -1,5 +1,5 @@
 import RacketsPage from "@/pages/rackets";
-import { fetchRackets } from "@/shared/api/fetchRackets";
+import { fetchRackets } from "@/shared/api/rackets";
 import { RacketType } from "@/shared/lib/types";
 import { Metadata } from "next";
 
@@ -8,11 +8,15 @@ export const metadata: Metadata = {
 };
 
 export default async function Rackets() {
-  // TODO: Create helper for fetching
-  const rackets = await fetchRackets().then((res) => res.json());
+  const { isError, data } = await fetchRackets({ page: 1, limit: 20 });
+
+  if (isError) return "error";
+
+  if (data === undefined) return "no data";
+
   const brands: string[] = Array.from(
-    new Set(rackets.map((racket: RacketType) => racket.brand.name))
+    new Set(data.map((racket: RacketType) => racket.brand.name))
   );
 
-  return <RacketsPage racketsData={rackets} brandsNames={brands} />;
+  return <RacketsPage racketsData={data} brandsNames={brands} />;
 }

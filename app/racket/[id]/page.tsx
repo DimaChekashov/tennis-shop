@@ -1,11 +1,6 @@
 import RacketPage from "@/pages/racket";
-import { fetchRackets } from "@/shared/api/fetchRackets";
-import { RacketType } from "@/shared/lib/types";
+import { fetchRacketById } from "@/shared/api/rackets";
 import { Metadata } from "next";
-
-export async function generateStaticParams() {
-  return [{ id: "1" }, { id: "4" }, { id: "7" }];
-}
 
 export async function generateMetadata({
   params,
@@ -14,18 +9,13 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { id } = await params;
 
-  // TODO: Create helper for fetching
-  const racket = await fetchRackets()
-    .then((res) => res.json())
-    .then((data) =>
-      data.find((racket: RacketType) => racket.id === Number(id))
-    );
+  const { data, isError } = await fetchRacketById(id);
 
-  if (!racket) return {};
+  if (isError || data === undefined) return {};
 
   return {
-    title: `Tennis Shop - ${racket.name}`,
-    description: racket.description,
+    title: `Tennis Shop - ${data.name}`,
+    description: data.description,
   };
 }
 
