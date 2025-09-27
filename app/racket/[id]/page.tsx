@@ -2,11 +2,11 @@ import RacketPage from "@/pages/racket";
 import { fetchRacketById } from "@/shared/api/rackets";
 import { Metadata } from "next";
 
-export async function generateMetadata({
-  params,
-}: {
+type Props = {
   params: Promise<{ id: string }>;
-}): Promise<Metadata> {
+};
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { id } = await params;
 
   const { data, isError } = await fetchRacketById(id);

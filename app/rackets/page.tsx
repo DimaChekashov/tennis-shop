@@ -5,6 +5,7 @@ import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Tennis Shop - Rackets",
+  description: "Tennis Shop - Rackets for tennis players",
 };
 
 export default async function Rackets() {
