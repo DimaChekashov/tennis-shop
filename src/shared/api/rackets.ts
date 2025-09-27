@@ -18,11 +18,11 @@ export const fetchRackets = async ({
     };
   }
 
-  const rackets: RacketType[] = await response.json();
+  const data: RacketType[] = await response.json();
 
   return {
     isError: false,
-    data: rackets,
+    data,
   };
 };
 
@@ -40,11 +40,11 @@ export const fetchRacketById = async (
     };
   }
 
-  const racket: { product: RacketType } = await response.json();
+  const data: { product: RacketType } = await response.json();
 
   return {
     isError: false,
-    data: racket.product,
+    data: data.product,
   };
 };
 
@@ -58,10 +58,10 @@ export const fetchTopTenRackets = async (): Promise<Response<RacketType[]>> => {
     };
   }
 
-  const rackets: RacketType[] = await response.json();
+  const data: RacketType[] = await response.json();
 
   return {
     isError: false,
-    data: rackets,
+    data,
   };
 };
