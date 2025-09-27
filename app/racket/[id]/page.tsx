@@ -1,5 +1,5 @@
 import RacketPage from "@/pages/racket";
-import { fetchRacketById } from "@/shared/api/rackets";
+import { fetchRacketMetaById } from "@/shared/api/rackets";
 import { Metadata } from "next";
 
 type Props = {
@@ -9,7 +9,7 @@ type Props = {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { id } = await params;
 
-  const { data, isError } = await fetchRacketById(id);
+  const { data, isError } = await fetchRacketMetaById(id);
 
   if (isError || data === undefined) return {};
 

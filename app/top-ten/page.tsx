@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   description: "Tennis Shop - Top-10 Rackets for tennis players",
 };
 
-export default async function Rackets() {
+export default async function TopTenRackets() {
   const rackets = await fetchTopTenRackets();
 
   if (rackets.isError) return "error";
