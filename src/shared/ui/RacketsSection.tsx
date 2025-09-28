@@ -1,5 +1,6 @@
 "use client";
 
+import { use } from "react";
 import Link from "next/link";
 import { RacketType, Response } from "../lib/types";
 import { RacketItem } from "./RacketItem";
@@ -12,19 +13,23 @@ import "swiper/css";
 import "swiper/css/navigation";
 
 interface RacketsSectionProps {
-  rackets: Response<RacketType[]>;
+  racketsPromise: Promise<Response<RacketType[]>>;
   title: string;
   routeHref: string;
 }
 
 export const RacketsSection = ({
-  rackets,
+  racketsPromise,
   title,
   routeHref,
 }: RacketsSectionProps) => {
-  if (rackets.isError) return "error";
+  const { isError, data } = use(racketsPromise);
 
-  if (rackets.data === undefined) return "no data";
+  if (isError) {
+    throw new Error("error");
+  }
+
+  if (data === undefined) return null;
 
   return (
     <>
@@ -45,7 +50,7 @@ export const RacketsSection = ({
         navigation
         className="mb-15"
       >
-        {rackets.data.map((racket: RacketType) => (
+        {data.map((racket: RacketType) => (
           <SwiperSlide key={racket.id}>
             <RacketItem racket={racket} isLargeHeading={true} />
           </SwiperSlide>
