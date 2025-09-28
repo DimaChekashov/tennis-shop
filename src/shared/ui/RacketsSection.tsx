@@ -1,6 +1,6 @@
 "use client";
 
-import { use } from "react";
+import { use, useEffect, useState } from "react";
 import Link from "next/link";
 import { RacketType, Response } from "../lib/types";
 import { RacketItem } from "./RacketItem";
@@ -24,15 +24,24 @@ export const RacketsSection = ({
   routeHref,
 }: RacketsSectionProps) => {
   const { isError, data } = use(racketsPromise);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   if (isError) {
     throw new Error("error");
   }
 
+  useEffect(() => {
+    setIsLoaded(true);
+  }, []);
+
   if (data === undefined) return null;
 
   return (
-    <>
+    <div
+      className={`transition-opacity duration-300 ${
+        isLoaded ? "opacity-100" : "opacity-0"
+      }`}
+    >
       <div className="flex justify-between items-center mb-10">
         <h1 className="text-2xl">{title}</h1>
         <Link
@@ -56,6 +65,6 @@ export const RacketsSection = ({
           </SwiperSlide>
         ))}
       </Swiper>
-    </>
+    </div>
   );
 };

@@ -9,7 +9,11 @@ type RacketPageProps = {
 export const RacketPage = async ({ racketId }: RacketPageProps) => {
   const { data, isError } = await fetchRacketById(racketId);
 
-  if (isError || !data) return notFound();
+  if (isError) {
+    throw new Error("error");
+  }
+
+  if (!data) return notFound();
 
   const { model, name, description, imageUrl, price, year, brand } = data;
 

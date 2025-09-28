@@ -8,11 +8,13 @@ export const metadata: Metadata = {
 };
 
 export default async function TopTenRackets() {
-  const rackets = await fetchTopTenRackets();
+  const { isError, data } = await fetchTopTenRackets();
 
-  if (rackets.isError) return "error";
+  if (isError) {
+    throw new Error("error");
+  }
 
-  if (rackets.data === undefined) return "no data";
+  if (data === undefined) return <>Список ракеток пуст!</>;
 
-  return <TopTenPage racketsData={rackets.data} />;
+  return <TopTenPage racketsData={data} />;
 }
