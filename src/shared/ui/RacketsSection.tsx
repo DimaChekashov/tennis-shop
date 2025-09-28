@@ -54,10 +54,16 @@ export const RacketsSection = ({
 
       <Swiper
         modules={[Navigation]}
-        spaceBetween={20}
-        slidesPerView={5}
+        spaceBetween={16}
+        slidesPerView={2}
         navigation
         className="mb-15"
+        breakpoints={{
+          9: { slidesPerView: 1, spaceBetween: 20 },
+          768: { slidesPerView: 3 },
+          1024: { slidesPerView: 4, spaceBetween: 20 },
+          1536: { slidesPerView: 5, spaceBetween: 20 },
+        }}
       >
         {data.map((racket: RacketType) => (
           <SwiperSlide key={racket.id}>

@@ -25,7 +25,7 @@ export default function RootLayout({
       >
         <NextTopLoader />
         <Header />
-        <main className="container mx-auto px-6">{children}</main>
+        <main className="min-w-xs container mx-auto">{children}</main>
         <Footer />
       </body>
     </html>
