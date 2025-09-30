@@ -4,14 +4,17 @@ import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Tennis Shop - Top-10 Rackets",
+  description: "Tennis Shop - Top-10 Rackets for tennis players",
 };
 
-export default async function Rackets() {
-  const rackets = await fetchTopTenRackets();
+export default async function TopTenRackets() {
+  const { isError, data } = await fetchTopTenRackets();
 
-  if (rackets.isError) return "error";
+  if (isError) {
+    throw new Error("error");
+  }
 
-  if (rackets.data === undefined) return "no data";
+  if (data === undefined) return <>Список ракеток пуст!</>;
 
-  return <TopTenPage racketsData={rackets.data} />;
+  return <TopTenPage racketsData={data} />;
 }

@@ -3,7 +3,7 @@ import { ROUTES } from "../lib/consts";
 import { RacketType } from "../lib/types";
 import React from "react";
 import Image from "next/image";
-import cn from "classnames";
+import classNames from "classnames";
 
 type RacketItemType = {
   racket: RacketType;
@@ -15,7 +15,11 @@ export const RacketItem: React.FC<RacketItemType> = ({
   isLargeHeading = false,
 }) => {
   return (
-    <Link href={ROUTES.racket(racket.id)} prefetch={false} className="group">
+    <Link
+      href={ROUTES.racket(racket.id)}
+      prefetch={false}
+      className="group block"
+    >
       <div className="border border-border relative aspect-3/4 mb-4">
         <Image
           src={racket.imageUrl}
@@ -25,7 +29,7 @@ export const RacketItem: React.FC<RacketItemType> = ({
         />
       </div>
       <div
-        className={cn(
+        className={classNames(
           "text-heading transition group-hover:text-accent",
           isLargeHeading ? "lg:text-xl" : "lg:text-lg"
         )}

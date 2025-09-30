@@ -48,8 +48,32 @@ export const fetchRacketById = async (
   };
 };
 
+export const fetchRacketMetaById = async (
+  id: string
+): Promise<Response<RacketType>> => {
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_RACKET_API}/meta/product/${id}`
+  );
+
+  if (!response.ok) {
+    return {
+      isError: true,
+      data: undefined,
+    };
+  }
+
+  const data: { product: RacketType } = await response.json();
+
+  return {
+    isError: false,
+    data: data.product,
+  };
+};
+
 export const fetchTopTenRackets = async (): Promise<Response<RacketType[]>> => {
-  const response = await fetch(`${process.env.NEXT_PUBLIC_RACKET_API}/top-10`);
+  const response = await fetch(`${process.env.NEXT_PUBLIC_RACKET_API}/top-10`, {
+    next: { revalidate: 5, tags: ["fetchTopTenRackets"] },
+  });
 
   if (!response.ok) {
     return {
