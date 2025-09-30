@@ -8,6 +8,7 @@ import Image from "next/image";
 import ArrowIcon from "@/shared/assets/images/icons/arrow.svg";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
+import classNames from "classnames";
 
 import "swiper/css";
 import "swiper/css/navigation";
@@ -38,9 +39,10 @@ export const RacketsSection = ({
 
   return (
     <div
-      className={`transition-opacity duration-300 ${
+      className={classNames(
+        "transition-opacity duration-300",
         isLoaded ? "opacity-100" : "opacity-0"
-      }`}
+      )}
     >
       <div className="flex justify-between items-center mb-10">
         <h1 className="text-2xl">{title}</h1>
@@ -65,7 +67,7 @@ export const RacketsSection = ({
           1536: { slidesPerView: 5, spaceBetween: 20 },
         }}
       >
-        {data.map((racket: RacketType) => (
+        {data.map((racket) => (
           <SwiperSlide key={racket.id}>
             <RacketItem racket={racket} isLargeHeading={true} />
           </SwiperSlide>
