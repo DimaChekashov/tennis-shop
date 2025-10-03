@@ -21,3 +21,12 @@ export type Response<T> = {
   isError: boolean;
   data?: T;
 };
+
+export type UserType = {
+  name: string;
+};
+
+export type LoginState = {
+  error?: string;
+  redirectTo?: string;
+};
