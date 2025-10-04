@@ -8,7 +8,7 @@ interface LoginFormProps {
   error: string | undefined;
   formAction: (payload: FormData) => void;
   isPending: boolean;
-  isLogin: boolean;
+  isLogin?: boolean;
 }
 
 export const LoginForm = ({
