@@ -5,6 +5,7 @@ export const BRANDS_ALL = "All";
 const ROOT_ROUTES = {
   rackets: "/rackets",
   login: "/login",
+  signUp: "/sign-up",
 } as const;
 
 export const ROUTES = {

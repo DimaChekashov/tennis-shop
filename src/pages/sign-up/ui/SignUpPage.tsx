@@ -2,14 +2,14 @@
 
 import { LoginState } from "@/shared/lib/types";
 import { useActionState, useEffect } from "react";
-import { loginAction } from "../api/login-action";
+import { signUpAction } from "../api/sign-up-action";
 import { LoginForm } from "@/shared/ui/LoginForm";
 
-export const LoginPage = () => {
+export const SignUpPage = () => {
   const [{ error, redirectTo }, formAction, isPending] = useActionState<
     LoginState,
     FormData
-  >(loginAction, { error: "" });
+  >(signUpAction, { error: "" });
 
   useEffect(() => {
     if (redirectTo) {
@@ -20,8 +20,8 @@ export const LoginPage = () => {
   return (
     <div className="flex items-center justify-center min-h-screen">
       <LoginForm
-        title="Вход"
-        buttonTitle="Войти"
+        title="Регистрация"
+        buttonTitle="Зарегистрироваться"
         error={error}
         formAction={formAction}
         isPending={isPending}
