@@ -4,7 +4,7 @@ import { Response, UserType } from "../lib/types";
 export const getUser = async (): Promise<Response<UserType>> => {
   const cookieStore = await cookies();
 
-  const result = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/user`, {
+  const result = await fetch(`${process.env.NEXT_PUBLIC_RACKET_API}/auth/user`, {
     credentials: "include",
     headers: {
       Cookie: cookieStore.toString(),
