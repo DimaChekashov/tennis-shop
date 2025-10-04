@@ -7,8 +7,6 @@ import { PropsWithChildren } from "react";
 export default async function AuthLayout({ children }: PropsWithChildren) {
   const { data } = await getUser();
 
-  console.log(data);
-
   return (
     <div className="grid grid-rows-[auto_1fr_auto] min-h-screen">
       <UserProvider user={data}>
