@@ -18,9 +18,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${roboto.variable} grid grid-rows-[auto_1fr_auto] min-h-screen`}
-      >
+      <body className={`${roboto.variable}`}>
         <NextTopLoader />
         {children}
       </body>

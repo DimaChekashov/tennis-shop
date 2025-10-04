@@ -9,10 +9,10 @@ export default async function AuthLayout({ children }: PropsWithChildren) {
   console.log(data);
 
   return (
-    <>
+    <div className="grid grid-rows-[auto_1fr_auto] min-h-screen">
       <Header />
       <main className="min-w-xs container mx-auto">{children}</main>
       <Footer />
-    </>
+    </div>
   );
 }
