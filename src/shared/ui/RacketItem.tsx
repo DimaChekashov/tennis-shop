@@ -4,6 +4,7 @@ import { RacketType } from "../lib/types";
 import React from "react";
 import Image from "next/image";
 import classNames from "classnames";
+import { useUser } from "@/app/providers/user-provider/hooks";
 
 type RacketItemType = {
   racket: RacketType;
@@ -14,6 +15,8 @@ export const RacketItem: React.FC<RacketItemType> = ({
   racket,
   isLargeHeading = false,
 }) => {
+  const user = useUser();
+
   return (
     <Link
       href={ROUTES.racket(racket.id)}

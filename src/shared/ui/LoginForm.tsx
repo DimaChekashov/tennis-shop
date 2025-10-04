@@ -1,4 +1,6 @@
+import Link from "next/link";
 import { Field } from "./Field";
+import { ROUTES } from "../lib/consts";
 
 interface LoginFormProps {
   title: string;
@@ -6,6 +8,7 @@ interface LoginFormProps {
   error: string | undefined;
   formAction: (payload: FormData) => void;
   isPending: boolean;
+  isLogin: boolean;
 }
 
 export const LoginForm = ({
@@ -14,6 +17,7 @@ export const LoginForm = ({
   error,
   buttonTitle,
   isPending,
+  isLogin = false,
 }: LoginFormProps) => {
   return (
     <form
@@ -31,6 +35,12 @@ export const LoginForm = ({
       >
         {buttonTitle}
       </button>
+      <Link
+        href={isLogin ? ROUTES.signUp : ROUTES.login}
+        className="text-center mt-4 text-text"
+      >
+        {isLogin ? "Зарегистрироваться" : "Войти"}
+      </Link>
     </form>
   );
 };

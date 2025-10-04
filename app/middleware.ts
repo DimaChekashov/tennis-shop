@@ -1,11 +1,12 @@
 import { ROUTES } from "@/shared/lib/consts";
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
 
-// TODO: not wirking with 403 and login routes
 export async function middleware(request: NextRequest) {
   const sessionId = request.cookies.get("sessionId");
 
   console.log(sessionId);
+  console.log(12312312);
 
   if (sessionId && request.nextUrl.pathname.startsWith("/login")) {
     return NextResponse.redirect(ROUTES.home);
@@ -20,5 +21,5 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/"],
+  matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*)"],
 };

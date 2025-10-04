@@ -25,6 +25,7 @@ export const LoginPage = () => {
         error={error}
         formAction={formAction}
         isPending={isPending}
+        isLogin={true}
       />
     </div>
   );

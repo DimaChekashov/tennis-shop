@@ -1,4 +1,4 @@
-import { UserProvider } from "@/app/providers/user-provider";
+import { UserProvider } from "@/app/providers/user-provider/user-provider";
 import { getUser } from "@/shared/api/user";
 import Footer from "@/widgets/footer";
 import Header from "@/widgets/header";

@@ -14,4 +14,5 @@ export const ROUTES = {
   rackets: ROOT_ROUTES.rackets,
   topTen: `${ROOT_ROUTES.rackets}/top-ten`,
   login: ROOT_ROUTES.login,
+  signUp: ROOT_ROUTES.signUp
 } as const;
