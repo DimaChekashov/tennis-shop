@@ -40,8 +40,18 @@ export const fetchRackets = async ({
 export const fetchRacketById = async (
   id: string
 ): Promise<Response<RacketType>> => {
+  const cookieStore = await cookies();
+
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_RACKET_API}/product/${id}`
+    `${process.env.NEXT_PUBLIC_RACKET_API}/product/${id}`,
+    {
+      headers: {
+        Cookie: cookieStore.toString(),
+      },
+      next: {
+        tags: ["fetchRacketById"],
+      },
+    }
   );
 
   if (!response.ok) {
@@ -82,7 +92,12 @@ export const fetchRacketMetaById = async (
 };
 
 export const fetchTopTenRackets = async (): Promise<Response<RacketType[]>> => {
+  const cookieStore = await cookies();
+
   const response = await fetch(`${process.env.NEXT_PUBLIC_RACKET_API}/top-10`, {
+    headers: {
+      Cookie: cookieStore.toString(),
+    },
     next: { revalidate: 5, tags: ["fetchTopTenRackets"] },
   });
 

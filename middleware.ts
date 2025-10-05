@@ -5,9 +5,6 @@ import type { NextRequest } from "next/server";
 export async function middleware(request: NextRequest) {
   const sessionId = request.cookies.get("sessionId");
 
-  console.log("sessionId", sessionId);
-  console.log(12312312);
-
   if (sessionId !== undefined) {
     const { pathname } = request.nextUrl;
 

@@ -1,21 +1,32 @@
 import Image from "next/image";
-import { notFound } from "next/navigation";
-import { fetchRacketById } from "@/shared/api/rackets";
+import { RacketType } from "@/shared/lib/types";
+import { FavoriteButton } from "@/shared/ui/FavoriteButton";
+import { useUser } from "@/app/providers/user-provider/hooks";
+import { useIsFavoriteById } from "@/app/providers/favorite-provider/hooks";
 
 type RacketPageProps = {
-  racketId: string;
+  data: RacketType;
 };
 
-export const RacketPage = async ({ racketId }: RacketPageProps) => {
-  const { data, isError } = await fetchRacketById(racketId);
+export const RacketPage = ({ data }: RacketPageProps) => {
+  const user = useUser();
 
-  if (isError) {
-    throw new Error("error");
-  }
+  const {
+    id,
+    model,
+    name,
+    description,
+    imageUrl,
+    price,
+    year,
+    brand,
+    userData,
+  } = data;
 
-  if (!data) return notFound();
-
-  const { model, name, description, imageUrl, price, year, brand } = data;
+  const isFavoriteGlobal = useIsFavoriteById({
+    id: id,
+    isFavoriteInitial: Boolean(userData?.isFavorite),
+  });
 
   return (
     <div className="grid gap-6 lg:gap-10 lg:grid-cols-4">
@@ -25,6 +36,15 @@ export const RacketPage = async ({ racketId }: RacketPageProps) => {
         <p className="text-text text-sm lg:text-base">{description}</p>
       </div>
       <div className="border border-border relative aspect-3/4 max-w-md order-first lg:max-w-full lg:order-none lg:col-span-2">
+        {isFavoriteGlobal && (
+          <Image
+            src="http://localhost:4000/bookmark.png"
+            alt="bookmark"
+            width={50}
+            height={50}
+            className="absolute top-2 right-2 z-10"
+          />
+        )}
         <Image
           src={imageUrl}
           alt={name}
@@ -36,6 +56,9 @@ export const RacketPage = async ({ racketId }: RacketPageProps) => {
         <p className="text-heading text-lg lg:text-1xl">Год: {year}</p>
         <p className="text-heading text-lg lg:text-1xl">Бренд: {brand.name}</p>
         <p className="text-heading text-xl lg:text-2xl mt-4">Цена: {price}$</p>
+        {user !== undefined && (
+          <FavoriteButton isFavorite={isFavoriteGlobal} racketId={id} />
+        )}
       </div>
     </div>
   );
