@@ -6,6 +6,10 @@ import Image from "next/image";
 import classNames from "classnames";
 import { useUser } from "@/app/providers/user-provider/hooks";
 import { FavoriteButton } from "./FavoriteButton";
+import {
+  useHydrateFavorite,
+  useIsFavoriteById,
+} from "@/app/providers/favorite-provider/hooks";
 
 type RacketItemType = {
   racket: RacketType;
@@ -18,6 +22,16 @@ export const RacketItem: React.FC<RacketItemType> = ({
 }) => {
   const user = useUser();
 
+  useHydrateFavorite({
+    racketId: racket.id,
+    isFavorite: Boolean(racket.userData?.isFavorite),
+  });
+
+  const isFavoriteGlobal = useIsFavoriteById({
+    id: racket.id,
+    isFavoriteInitial: Boolean(racket.userData?.isFavorite),
+  });
+
   return (
     <div>
       <Link
@@ -25,7 +39,16 @@ export const RacketItem: React.FC<RacketItemType> = ({
         prefetch={false}
         className="group block"
       >
-        <div className="border border-border relative aspect-3/4 mb-4">
+        <div className="relative border border-border aspect-3/4 mb-4">
+          {isFavoriteGlobal && (
+            <Image
+              src="http://localhost:4000/bookmark.png"
+              alt="bookmark"
+              width={50}
+              height={50}
+              className="absolute top-2 right-2 z-10"
+            />
+          )}
           <Image
             src={racket.imageUrl}
             alt={racket.name}

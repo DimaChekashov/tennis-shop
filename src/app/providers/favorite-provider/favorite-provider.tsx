@@ -1,3 +1,5 @@
+"use client";
+
 import { RacketType } from "@/shared/lib/types";
 import { createContext, PropsWithChildren, useCallback, useState } from "react";
 

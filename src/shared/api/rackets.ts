@@ -1,3 +1,4 @@
+import { cookies } from "next/headers";
 import { RacketType, Response } from "../lib/types";
 
 export const fetchRackets = async ({
@@ -7,8 +8,18 @@ export const fetchRackets = async ({
   page?: number;
   limit?: number;
 } = {}): Promise<Response<RacketType[]>> => {
+  const cookieStore = await cookies();
+
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_RACKET_API}/products?page=${page}&limit=${limit}`
+    `${process.env.NEXT_PUBLIC_RACKET_API}/products?page=${page}&limit=${limit}`,
+    {
+      headers: {
+        Cookie: cookieStore.toString(),
+      },
+      next: {
+        tags: ["fetchRackets"],
+      },
+    }
   );
 
   if (!response.ok) {
