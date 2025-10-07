@@ -10,6 +10,9 @@ export type RacketType = {
   description: string;
   brandId: number;
   brand: BrandType;
+  userData?: {
+    isFavorite?: boolean;
+  };
 };
 
 export type BrandType = {

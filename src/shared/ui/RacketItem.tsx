@@ -5,19 +5,32 @@ import React from "react";
 import Image from "next/image";
 import classNames from "classnames";
 import { useUser } from "@/app/providers/user-provider/hooks";
+import { FavoriteButton } from "./FavoriteButton";
+import {
+  useHydrateFavorite,
+  useIsFavoriteById,
+} from "@/app/providers/favorite-provider/hooks";
 
 type RacketItemType = {
   racket: RacketType;
   isLargeHeading?: boolean;
 };
 
-const addToFavorite = (event: React.MouseEvent<HTMLButtonElement>) => {};
-
 export const RacketItem: React.FC<RacketItemType> = ({
   racket,
   isLargeHeading = false,
 }) => {
   const user = useUser();
+
+  useHydrateFavorite({
+    racketId: racket.id,
+    isFavorite: Boolean(racket.userData?.isFavorite),
+  });
+
+  const isFavoriteGlobal = useIsFavoriteById({
+    id: racket.id,
+    isFavoriteInitial: Boolean(racket.userData?.isFavorite),
+  });
 
   return (
     <div>
@@ -26,7 +39,16 @@ export const RacketItem: React.FC<RacketItemType> = ({
         prefetch={false}
         className="group block"
       >
-        <div className="border border-border relative aspect-3/4 mb-4">
+        <div className="relative border border-border aspect-3/4 mb-4">
+          {isFavoriteGlobal && (
+            <Image
+              src="http://localhost:4000/bookmark.png"
+              alt="bookmark"
+              width={50}
+              height={50}
+              className="absolute top-2 right-2 z-10"
+            />
+          )}
           <Image
             src={racket.imageUrl}
             alt={racket.name}
@@ -44,16 +66,7 @@ export const RacketItem: React.FC<RacketItemType> = ({
         </div>
       </Link>
       {user !== undefined && (
-        <button
-          type="button"
-          onClick={addToFavorite}
-          className="cursor-pointer text-accent h-10 flex gap-2 items-center justify-center bg-gray-200 hover:bg-gray-300 rounded-lg px-4 w-full mt-4"
-        >
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
-          </svg>
-          Добавить в избранное
-        </button>
+        <FavoriteButton isFavorite={isFavoriteGlobal} racketId={racket.id} />
       )}
     </div>
   );

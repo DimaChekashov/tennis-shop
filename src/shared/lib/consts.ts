@@ -10,9 +10,9 @@ const ROOT_ROUTES = {
 
 export const ROUTES = {
   home: "/",
-  racket: (id: number) => `/racket/${id}`,
+  racket: (id: number) => `/racket-client/${id}`,
   rackets: ROOT_ROUTES.rackets,
   topTen: `${ROOT_ROUTES.rackets}/top-ten`,
   login: ROOT_ROUTES.login,
-  signUp: ROOT_ROUTES.signUp
+  signUp: ROOT_ROUTES.signUp,
 } as const;

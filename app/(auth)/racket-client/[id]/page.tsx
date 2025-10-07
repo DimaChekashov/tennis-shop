@@ -1,7 +1,7 @@
 import { RacketContainer } from "@/pages/racket/ui/RacketContainer";
 import { fetchRacketById, fetchRacketMetaById } from "@/shared/api/rackets";
 import { Metadata } from "next";
-import { notFound } from "next/navigation";
+import { SWRConfig } from "swr";
 
 type Props = {
   params: Promise<{ id: string }>;
@@ -27,13 +27,18 @@ export default async function Racket({
 }) {
   const { id } = await params;
 
-  const { data, isError } = await fetchRacketById(id);
+  const result = await fetchRacketById(id);
 
-  if (isError) {
-    throw new Error("error");
-  }
-
-  if (!data) return notFound();
-
-  return <RacketContainer racketId={id} />;
+  return (
+    <SWRConfig
+      value={{
+        fallback: {
+          [`racket/${id}`]: result,
+        },
+        revalidateOnFocus: false,
+      }}
+    >
+      <RacketContainer racketId={id} />
+    </SWRConfig>
+  );
 }
