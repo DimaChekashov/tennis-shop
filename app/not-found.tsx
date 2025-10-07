@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 export default async function Racket() {
   return (
-    <div className="flex flex-col items-center justify-center min-h-full">
+    <div className="flex flex-col items-center justify-center min-h-screen">
       <h1 className="text-4xl font-bold">404 - Страница не найдена!</h1>
       <Link
         href={ROUTES.home}

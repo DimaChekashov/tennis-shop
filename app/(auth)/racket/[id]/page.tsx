@@ -1,6 +1,7 @@
-import RacketPage from "@/pages/racket";
-import { fetchRacketMetaById } from "@/shared/api/rackets";
+import { RacketContainer } from "@/pages/racket/ui/RacketContainer";
+import { fetchRacketById, fetchRacketMetaById } from "@/shared/api/rackets";
 import { Metadata } from "next";
+import { notFound } from "next/navigation";
 
 type Props = {
   params: Promise<{ id: string }>;
@@ -26,5 +27,13 @@ export default async function Racket({
 }) {
   const { id } = await params;
 
-  return <RacketPage racketId={id} />;
+  const { data, isError } = await fetchRacketById(id);
+
+  if (isError) {
+    throw new Error("error");
+  }
+
+  if (!data) return notFound();
+
+  return <RacketContainer racketId={id} />;
 }

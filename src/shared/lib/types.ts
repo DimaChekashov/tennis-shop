@@ -10,6 +10,9 @@ export type RacketType = {
   description: string;
   brandId: number;
   brand: BrandType;
+  userData?: {
+    isFavorite?: boolean;
+  };
 };
 
 export type BrandType = {
@@ -20,4 +23,13 @@ export type BrandType = {
 export type Response<T> = {
   isError: boolean;
   data?: T;
+};
+
+export type UserType = {
+  name: string;
+};
+
+export type LoginState = {
+  error?: string;
+  redirectTo?: string;
 };

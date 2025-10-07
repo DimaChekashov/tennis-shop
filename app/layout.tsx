@@ -1,7 +1,5 @@
 import { Roboto } from "next/font/google";
 import type { Metadata } from "next";
-import Header from "@/widgets/header";
-import Footer from "@/widgets/footer";
 import NextTopLoader from "nextjs-toploader";
 
 import "@/app/styles/globals.css";
@@ -20,13 +18,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${roboto.variable} grid grid-rows-[auto_1fr_auto] min-h-screen`}
-      >
+      <body className={`${roboto.variable}`}>
         <NextTopLoader />
-        <Header />
-        <main className="min-w-xs container mx-auto">{children}</main>
-        <Footer />
+        {children}
       </body>
     </html>
   );
